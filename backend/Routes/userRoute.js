@@ -6,9 +6,9 @@ const { main } = require("../helper");
 userRoute.get("/user", async (req, res) => {
   try {
     const user = await userModel.find();
-    return res.send(user);
+    return res.json(user);
   } catch (error) {
-    return res.send(error);
+    return res.json(error);
   }
 });
 
@@ -16,9 +16,9 @@ userRoute.get("/user/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const user = await userModel.findById(id);
-    return res.send(user);
+    return res.json(user);
   } catch (error) {
-    return res.send(error);
+    return res.json(error);
   }
 });
 
@@ -30,9 +30,9 @@ userRoute.post("/user", async (req, res) => {
     const msg =
       "<p style='background-color:aqua;color:red;padding:20px;margin-top:20px;'>Thanks for Registration on MuscleMeter 🙋‍♂️🙋‍♀️</p>";
     main(req.body.email, sub, msg);
-    return res.send({ msg: "Registration Success" });
+    return res.json({ msg: "Registration Success" });
   } catch (error) {
-    return res.send({ msg: error });
+    return res.json({ msg: error });
   }
 });
 
@@ -42,15 +42,15 @@ userRoute.post("/userlog", async (req, res) => {
     const result = await userModel.findOne({ email }); //findOne() only takes object
     if (result) {
       if (result.password == password) {
-        return res.send({ msg: "Login Successful", id: result._id });
+        return res.json({ msg: "Login Successful", id: result._id });
       } else {
-        return res.send({ msg: "Incorrect Password" });
+        return res.json({ msg: "Incorrect Password" });
       }
     } else {
-      return res.send({ msg: "User Not Found" });
+      return res.json({ msg: "User Not Found" });
     }
   } catch (error) {
-    return res.send({ msg: error });
+    return res.json({ msg: error });
   }
 });
 
@@ -58,9 +58,9 @@ userRoute.delete("/user", async (req, res) => {
   try {
     const { id } = req.body;
     const result = await userModel.findByIdAndDelete(id);
-    return res.send({ msg: "Deleted Successfully" });
+    return res.json({ msg: "Deleted Successfully" });
   } catch (error) {
-    return res.send({ msg: error });
+    return res.json({ msg: error });
   }
 });
 
@@ -69,9 +69,9 @@ userRoute.patch("/user/:id", async (req, res) => {
       const id = req.params.id;
       const body = req.body;
       const result = await userModel.findByIdAndUpdate(id, body);
-      return res.send({ msg: "Profile Updated Successfully" });
+      return res.json({ msg: "Profile Updated Successfully" });
     } catch (error) {
-      return res.send({ msg: error });
+      return res.json({ msg: error });
     }
   });
 

@@ -10,21 +10,21 @@ membershipRoute.get("/membership/:id", async (req, res) => {
     const email = result.email;
     const result2 = await membershipModel.findOne({ email });
     if (result2 == null) {
-      return res.send({ msg: "Not Found" });
+      return res.json({ msg: "Not Found" });
     } else {
-      return res.send({ msg: "Found", res: result2 });
+      return res.json({ msg: "Found", res: result2 });
     }
   } catch (error) {
-    return res.send({ msg: error });
+    return res.json({ msg: error });
   }
 });
 
 membershipRoute.get("/membership", async (req, res) => {
   try {
     const result = await membershipModel.find();
-    return res.send({ msg: "Found", res: result });
+    return res.json({ msg: "Found", res: result });
   } catch (error) {
-    return res.send({ msg: error });
+    return res.json({ msg: error });
   }
 });
 
@@ -53,9 +53,9 @@ membershipRoute.post("/membership", async (req, res) => {
       starting: sd,
       ending: ed,
     }); //p-pending,n-notapproved
-    return res.send({ msg: "MemberShip Registration Success" });
+    return res.json({ msg: "MemberShip Registration Success" });
   } catch (error) {
-    return res.send({ msg: error });
+    return res.json({ msg: error });
   }
 });
 
@@ -64,9 +64,9 @@ membershipRoute.patch("/membership/:id/:ps", async (req, res) => {
     const id = req.params.id;
     const ps = req.params.ps;
     const result = await membershipModel.findByIdAndUpdate(id, { pstatus: ps }); //p-pending,n-notapproved
-    return res.send({ msg: "MemberShip Payment Status Changed" });
+    return res.json({ msg: "MemberShip Payment Status Changed" });
   } catch (error) {
-    return res.send({ msg: error });
+    return res.json({ msg: error });
   }
 });
 
