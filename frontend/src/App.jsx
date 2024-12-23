@@ -59,7 +59,8 @@ function App() {
           <Route path='/ViewAdOtherFeed' element={<ViewAdOtherFeed />}/>
           <Route path='/BeMember' element={<BeMember />}/>
           <Route path='/EditUser' element={<EditUser />}/>
-          <Route path='/:404' element={<Nofound />}/>
+          {/* '/:404' changed to '*' */}
+          <Route path='*' element={<Nofound />}/>
         </Routes>
         <Footer />
         </BrowserRouter>
